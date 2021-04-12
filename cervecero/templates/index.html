@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+  <title>Cervecero</title>
+</head>
+<body>
+  <div class="container m-5">
+    <div class="row">
+      <div class="col-md-4">
+        <a href="/"><img src="/static/img/cervecero.png" class="rounded mx-auto d-block" alt="Cervecero"></a>
+      </div>
+      <div class="col-md-8">
+        <div class="alert alert-info" role="alert">
+          Bienvenido a Cervecero, por favor seleccione una variable e introduzca su valor para predecir el consumo de cerveza.
+        </div>
+        <form action="/predictor" method="post">
+        <div class="form-group">
+
+          <label for="X_n">Seleccione variable</label>
+          <select class="form-control" id="X_n" name="X_n">
+            <option value="1">Temperatura media (&deg; C)</option>
+            <option value="2">Temperatura mínima(&deg; C)</option>
+            <option value="3">Temperatura máxima(&deg; C)</option>
+            <option value="4">Precipitación (mm)</option>
+            <option value="5">Fin de semana (0 / 1)</option>
+          </select>
+
+          <label for="x_input">Valor</label>
+          <input type="text" class="form-control" placeholder="0" id="x_input" name="x_input">
+
+        </div>
+        <button type="submit" class="btn btn-primary" id="predecir">Predecir consumo</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="/static/js/jquery-3.4.1.min.js"></script>
+  <script src="/static/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

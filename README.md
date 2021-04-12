@@ -1,2 +1,1 @@
-# cervecero
-Modelo predictivo de consumo de cerveza
+# Modelo predictivo de consumo de cerveza
