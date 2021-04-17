@@ -22,3 +22,18 @@ Para cerrar Jupyter, vaya al terminal, pulse Ctrl+C y desactive Anaconda:
 ```sh
 conda deactivate
 ```
+
+## Paso 2 — Ejecución de la aplicación independiente
+
+El código de la predicción de consumo de cerveza basado en la regresión lineal se extrajo de `Clase-4-Dinámicas.ipyinb` y se llevó a `cervecero/modelos/clase4.py`. Nótese que se comentaron las líneas que emitían información del dataset y se encapsuló la lógica en una función `resultado`. Luego, este modelo se incorporó a una aplicación web simple de Python 3 basada en Flask.
+
+Para ejecutar esta aplicación:
+
+```sh
+cd ~/curso/cervecero
+python3 -m venv venv
+./venv/bin/pip3 install -r requirements.txt
+./venv/bin/python3 cervecero/server.py
+```
+
+Abra Firefox y navegue a http://localhost:9090/ para ver la aplicación.
