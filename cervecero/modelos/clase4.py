@@ -3,6 +3,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import unittest
 
 cerveza_df = pd.read_csv("./datasets/Consumo_cerveja.csv")
 # cerveza_df.head()
@@ -54,3 +55,21 @@ def resultado(X_n, x_input):
 	# plt.show()
 
 	return lin_reg_betas(x_input, beta_1, beta_0)
+
+
+class TestCervecero(unittest.TestCase):
+	# Todos los métodos que empiezan con test se consideran tests unitarios
+
+	def testSuma(self):
+		self.assertEqual(2, 1 + 1)
+
+	def testResta(self):
+		self.assertEqual(0, 1 - 1)
+
+	def testTemperaturaMaxima(self):
+		y = resultado(3, 30)
+		self.assertGreater(y, 27.0) and self.assertLess(y, 28.0)
+
+
+if __name__ == '__main__':
+	unittest.main()

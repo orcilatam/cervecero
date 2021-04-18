@@ -37,3 +37,27 @@ python3 -m venv venv
 ```
 
 Abra Firefox y navegue a http://localhost:9090/ para ver la aplicación.
+
+
+## Paso 3 — Jenkins y un pipeline mínimo
+
+Asumiendo que tenemos Jenkins instalado y correctamente configurado, podemos usarlo como infraestructura mínima para un pipeline.
+
+Jenkins está preinstalado en la VM, puede acceder a él en http://localhost:8080/
+
+Para ver el código de este paso:
+
+```sh
+git checkout master
+git reset --hard paso-3
+```
+
+Se agrega una shared library en Jenkins para uso de los pipelines. Ésta consta de una serie de funciones utilitarias en Groovy para uso de los pipelines. Para nuestro ejemplo usaremos https://github.com/orcilatam/sharedlib.
+
+Se agrega un pipeline básico en un nuevo archivo archivo `Jenkinsfile`; éste usa la shared library anterior. Aquí se observan las llamadas a los stages de compilación y ejecución de tests unitarios.
+
+Se agrega en Jenkins un job del tipo Multibranch pipeline que apunte al repositorio de Cervecero.
+
+Se modifica `clase4.py` para agregar tests unitarios.
+
+Finalmente, hacer clic en _Build Now_ en Jenkins.
