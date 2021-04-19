@@ -61,3 +61,21 @@ Se agrega en Jenkins un job del tipo Multibranch pipeline que apunte al reposito
 Se modifica `clase4.py` para agregar tests unitarios.
 
 Finalmente, hacer clic en _Build Now_ en Jenkins.
+
+
+## Paso 4 — Revisión de calidad de código con SonarQube
+
+Asumiendo que tenemos **SonarQube** instalado y correctamente configurado, podemos usarlo para revisar la calidad del código fuente de la aplicación.
+
+SonarQube está preinstalado en la nube, acceda a él en http://sonarqube:9000/
+
+Para ver el código de este paso:
+
+```sh
+git checkout master
+git reset --hard paso-4
+```
+
+Se agrega una llamada a `runSonarQubePython` en el `Jenkinsfile`y se agrega el archivo `sonar-project.properties` con parámetros para SonarQube. Nótese que el Sonar Scanner está preinstalado en la VM en `/opt/sonar-scanner`.
+
+Hacer clic en *Build Now* en Jenkins para ejecutar el pipeline. Una vez finalizado el pipeline, el reporte de calidad se puede observar en http://sonarqube:9000/
