@@ -5,6 +5,9 @@ import static com.orcilatam.devops.Stage.*
 def sonarqube = 'sonarqube:9000'
 def registry = 'artifactory:8082/docker-local'
 def registryId = 'registry-push-user'
+def containerPort = '9090'
+def kubeConfig = 'kubeconfig-multivac'
+def kubeNamespace = 'default'
 
 pipeline {
   agent any
@@ -49,6 +52,19 @@ pipeline {
         }
       }
     }
-        
+
+    stage('Despliegue a Kubernetes') {
+      steps {
+        script {
+          replacePlaceholder(this, 'deployment.yaml', 'registry', registry)
+          replacePlaceholder(this, 'deployment.yaml', 'project.port', containerPort)
+          replacePlaceholder(this, 'service.yaml', 'project.port', containerPort)
+
+          deployToKubernetes(this, kubeConfig, kubeNamespace, 'deployment.yaml')
+          deployToKubernetes(this, kubeConfig, kubeNamespace, 'service.yaml')
+        }
+      }
+    }
+
   }
 }

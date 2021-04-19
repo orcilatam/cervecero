@@ -117,3 +117,32 @@ git reset --hard paso-6
 Se agrega una llamada a `pushImageToArtifactory` en el `Jenkinsfile`.  Hacer clic en *Build Now* en Jenkins para ejecutar el pipeline.
 
 El servidor de artifactory está en la nube, se puede acceder a él en http://artifactory:8082/artifactory. Use el usuario `estudiante`.
+
+
+## Paso 7 — Despliegue a Kubernetes
+
+Kubernetes es un sistema de orquestación de contenedores para automatizar el despliegue, el escalado y la gestión de aplicaciones que actúan en conjunto en un *cluster*.
+
+Para este curso, desplegaremos a un *cluster* predefinido en Digital Ocean. El despliegue a Kubernetes requiere agregar al menos dos archivos YAML con la descripción del cluster: `service.yaml` y `deployment.yaml`.
+
+Para ver los archivos en el nuevo stage:
+
+```sh
+git checkout master
+git reset --hard paso-7
+```
+
+Se agregan (entre otras cosas) llamadas a  `deployToKubernetes` en el `Jenkinsfile`.  Hacer clic en *Build Now* en Jenkins para ejecutar el pipeline.
+
+El resultado del despliegue puede observarse ejecutando:
+
+```sh
+kubectl get services
+kubectl get deployments
+kubectl get pods
+POD=$( kubectl get pods | grep cervecero | cut -d ' ' -f 1 )
+kubectl get pod $POD
+kubectl describe pod $POD
+kubectl logs -f pod $POD
+kubectl logs -f $POD
+```

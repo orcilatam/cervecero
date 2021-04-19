@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ project.name }}
+  name: {{ project.name }}
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ project.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ project.name }}
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+      - image: {{ registry }}/{{ project.name }}:{{ project.version }}
+        imagePullPolicy: Always
+        name: {{ project.name }}
+        ports:
+        - containerPort: {{ project.port }}

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: {{ project.name }}
+  name: {{ project.name }}
+  namespace: default
+spec:
+  ports:
+  - port: 80
+    targetPort: {{ project.port }}
+  selector:
+    app: {{ project.name }}
+  type: ClusterIP
