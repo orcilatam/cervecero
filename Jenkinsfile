@@ -4,6 +4,7 @@ import static com.orcilatam.devops.Stage.*
 
 def sonarqube = 'sonarqube:9000'
 def registry = 'artifactory:8082/docker-local'
+def registryId = 'registry-push-user'
 
 pipeline {
   agent any
@@ -39,7 +40,15 @@ pipeline {
           buildDockerImage(this, registry)
         }
       }
-
     }
+
+    stage('Subida a Artifactory') {
+      steps {
+        script {
+          pushImageToArtifactory(this, registry, registryId)
+        }
+      }
+    }
+        
   }
 }

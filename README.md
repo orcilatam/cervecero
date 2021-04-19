@@ -101,3 +101,19 @@ git reset --hard paso-5
 ```
 
 Se agrega una llamada a `buildDockerImage` en el `Jenkinsfile`.  Hacer clic en *Build Now* en Jenkins para ejecutar el pipeline.
+
+
+## Paso 6 — Subida a Artifactory
+
+Artifactory, como lo sugiere su nombre, es un repositorio central de artefactos. En este paso se tomará la imagen Docker creada localmente y se subirá a una instancia de Artifactory en la nube.
+
+Para ver el nuevo stage:
+
+```sh
+git checkout master
+git reset --hard paso-6
+```
+
+Se agrega una llamada a `pushImageToArtifactory` en el `Jenkinsfile`.  Hacer clic en *Build Now* en Jenkins para ejecutar el pipeline.
+
+El servidor de artifactory está en la nube, se puede acceder a él en http://artifactory:8082/artifactory. Use el usuario `estudiante`.
