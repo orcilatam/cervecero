@@ -79,3 +79,25 @@ git reset --hard paso-4
 Se agrega una llamada a `runSonarQubePython` en el `Jenkinsfile`y se agrega el archivo `sonar-project.properties` con parámetros para SonarQube. Nótese que el Sonar Scanner está preinstalado en la VM en `/opt/sonar-scanner`.
 
 Hacer clic en *Build Now* en Jenkins para ejecutar el pipeline. Una vez finalizado el pipeline, el reporte de calidad se puede observar en http://sonarqube:9000/
+
+
+## Paso 5 — Creación de artefacto y construción de imagen Docker
+
+En términos generales, un _artefacto_ es un objeto binario que representa una aplicación, librería u otro recurso de una aplicación. Un artefacto consiste generalmente de un único archivo binario comprimido. Por ejemplo, para Java los packages `.jar`, `.ear` y `.war` se consideran artefactos. Para el caso de Python, como es un lenguaje dinámico e interpretado, no genera artefactos binarios (a menos que se use un compilador especializado, pero esto no es usual).
+
+Un artefacto tiene, además de un nombre, una *etiqueta* generalmente asociada con su número de versión. De esta manera es posible tener el mismo artefacto con distintas versiones.
+
+Una imagen de Docker es simplemente un artefacto que representa una máquina virtual muy ligera. Para este curso, construiremos una imagen de Docker simple que contendrá:
+
+- Un sistema operativo Debian mínimo (“slim”)
+- Python 3.9
+- El código de Flask y el código modelo de predicción
+
+Para ver estos cambios:
+
+```sh
+git checkout master
+git reset --hard paso-5
+```
+
+Se agrega una llamada a `buildDockerImage` en el `Jenkinsfile`.  Hacer clic en *Build Now* en Jenkins para ejecutar el pipeline.

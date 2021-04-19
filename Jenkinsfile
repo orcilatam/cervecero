@@ -3,6 +3,7 @@ import static com.orcilatam.devops.Const.*
 import static com.orcilatam.devops.Stage.*
 
 def sonarqube = 'sonarqube:9000'
+def registry = 'artifactory:8082/docker-local'
 
 pipeline {
   agent any
@@ -32,5 +33,13 @@ pipeline {
       }
     }
 
+    stage('Construcción de imagen Docker') {
+      steps {
+        script {
+          buildDockerImage(this, registry)
+        }
+      }
+
+    }
   }
 }
