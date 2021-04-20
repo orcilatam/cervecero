@@ -193,3 +193,15 @@ cd ~/curso/cervecero
 ```
 
 Puede acceder a los dashboards en el navegador Firefox de la VM abra [http://locahost:8084/](http://locahost:8084/). Puede ingresar con el usuario `admin`.
+
+
+## Paso adicional 10 — Infraestructura como código
+
+En los pasos anteriores la infraestructura ya se asumía instalada. La instalación de ésta generalmente se gestiona a través de **Terraform**.
+
+```sh
+git checkout master
+git reset --hard paso-10
+```
+
+La ejecución de este paso requiere su propio pipeline. Por favor, [continúe aquí](https://github.com/orcilatam/iac/) para completar el ejercicio.
