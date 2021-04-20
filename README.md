@@ -225,3 +225,19 @@ git reset --hard paso-11
 Hacer clic en *Build Now* en Jenkins para ejecutar el pipeline.
 
 Una vez concluido el pipeline haga clic en el número de Build. Al lado izquierdo aparece un link al reporte de Dependency Check.
+
+
+## Paso adicional 12 — Notificaciones a Slack
+
+Una característica útil de Jenkins es la capacidad de enviar notificaciones en vivo (vía un plugin) a un canal de Slack. Esto permite que otras personas observen y monitoreen la ejecución de un pipeline sin necesidad de ingresar a Jenkins.
+
+Para ver cómo incorporar notificaciones a Slack:
+
+```sh
+git checkout master
+git reset --hard paso-12
+```
+
+Hacer clic en *Build Now* en Jenkins para ejecutar el pipeline.
+
+Las notificaciones se envían al canal de Slack configurado en Jenkins.

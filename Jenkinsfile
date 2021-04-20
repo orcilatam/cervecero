@@ -17,6 +17,7 @@ pipeline {
     stage('Compilación') {
       steps {
         script {
+          sendSlackStageMessage(this)
           buildPython(this, 'cervecero', '1.0')
         }
       }
@@ -25,6 +26,7 @@ pipeline {
     stage('Tests unitarios') {
       steps {
         script {
+          sendSlackStageMessage(this)
           testPython(this)
         }
       }
@@ -33,6 +35,7 @@ pipeline {
     stage('OWASP Dependency Check') {
       steps {
         script {
+          sendSlackStageMessage(this)
           runOWASPDependencyChecks(this, 'cervecero')
         }
       }
@@ -41,6 +44,7 @@ pipeline {
     stage('Calidad de código') {
       steps {
         script {
+          sendSlackStageMessage(this)
           runSonarQubePython(this, sonarqube)
         }
       }
@@ -49,6 +53,7 @@ pipeline {
     stage('Construcción de imagen Docker') {
       steps {
         script {
+          sendSlackStageMessage(this)
           buildDockerImage(this, registry)
         }
       }
@@ -57,6 +62,7 @@ pipeline {
     stage('Subida a Artifactory') {
       steps {
         script {
+          sendSlackStageMessage(this)
           pushImageToArtifactory(this, registry, registryId)
         }
       }
@@ -65,6 +71,8 @@ pipeline {
     stage('Despliegue a Kubernetes') {
       steps {
         script {
+          sendSlackStageMessage(this)
+
           replacePlaceholder(this, 'deployment.yaml', 'registry', registry)
           replacePlaceholder(this, 'deployment.yaml', 'project.port', containerPort)
           replacePlaceholder(this, 'service.yaml', 'project.port', containerPort)
@@ -78,6 +86,7 @@ pipeline {
     stage('Instalación de LoadBalancer e Ingress Controller') {
       steps {
         script {
+          sendSlackStageMessage(this)
           updateHelmRepositories(this)
           installNginxIngressController(this, kubeConfig, kubeNamespace, ingressName)
         }
@@ -87,10 +96,25 @@ pipeline {
     stage('Configuración de Ingress') {
       steps {
         script {
+          sendSlackStageMessage(this)
           deployToKubernetes(this, kubeConfig, kubeNamespace, 'ingress.yaml')
         }
       }
     }
 
   }
+
+  post {
+    success {
+      script {
+        sendSlackSuccess(this, "Pipeline terminó exitosamente")
+      }
+    }
+    failure {
+      script {
+        sendSlackAlert(this, "Pipeline **falló**")
+      }
+    }
+  }
+
 }
