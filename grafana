@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+NS=kube-prometheus-stack
+POD=kube-prometheus-stack-grafana
+
+kubectl port-forward $( kubectl -n $NS get pods | grep $POD | cut -d ' ' -f 1 ) -n $NS $1:3000

@@ -170,3 +170,26 @@ Nótese que incluso después de instalar el Ingress Controller la aplicación co
 
 - Registrar un dominio público y apuntar los DNS a DigitalOcean. Para nuestro ejemplo usaremos el dominio `parroquiano.info`, que ya apunta a `ns{1,2}.digitalocean.com`
 - Crear un subdominio DNS `cervecero.parroquiano.info` que apunte al Ingress Controller creado con Helm (usar TTL 300)
+
+
+## Paso 9 — Prometheus y Grafana
+
+**Prometheus** es una base de datos para series de tiempo. Esto quiere decir que está optimizada para guardar eficientemente series de datos con *timestamps* y produce resultados rápidos para consultas basadas en intervalos de tiempo. Esto la hace ideal para guardar métricas de hardware, como uso de disco, CPU y red.
+
+Se suele usar en conjunción con **Grafana**, un producto para construir *dashboards* de visualización de métricas en tiempo real. Ambos constituyen una alternativa muy usada para monitorear clusters de Kubernetes.
+
+Prometheus y Grafana se pueden instalar directamente en el marketplace del cluster de Kubernetes de Digital Ocean.  Para acceder a los dashboards de Grafana, avance hasta el paso 9.
+
+```sh
+git checkout master
+git reset --hard paso-9
+```
+
+Y luego ejecute un utilitario para levantar un acceso local vía port forwarding:
+
+```sh
+cd ~/curso/cervecero
+./grafana 8084
+```
+
+Puede acceder a los dashboards en el navegador Firefox de la VM abra [http://locahost:8084/](http://locahost:8084/). Puede ingresar con el usuario `admin`.
