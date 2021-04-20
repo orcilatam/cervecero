@@ -3,3 +3,5 @@ venv
 .ipynb_checkpoints
 __pycache__
 .scannerwork
+.vscode
+dependency-check-report.*

@@ -81,9 +81,9 @@ Se agrega una llamada a `runSonarQubePython` en el `Jenkinsfile`y se agrega el a
 Hacer clic en *Build Now* en Jenkins para ejecutar el pipeline. Una vez finalizado el pipeline, el reporte de calidad se puede observar en http://sonarqube:9000/
 
 
-## Paso 5 — Creación de artefacto y construción de imagen Docker
+## Paso 5 — Creación de artefacto y construcción de imagen Docker
 
-En términos generales, un _artefacto_ es un objeto binario que representa una aplicación, librería u otro recurso de una aplicación. Un artefacto consiste generalmente de un único archivo binario comprimido. Por ejemplo, para Java los packages `.jar`, `.ear` y `.war` se consideran artefactos. Para el caso de Python, como es un lenguaje dinámico e interpretado, no genera artefactos binarios (a menos que se use un compilador especializado, pero esto no es usual).
+En términos generales, un _artefacto_ es un objeto binario que representa una aplicación, biblioteca u otro recurso de una aplicación. Un artefacto consiste generalmente de un único archivo binario comprimido. Por ejemplo, para Java los packages `.jar`, `.ear` y `.war` se consideran artefactos. Para el caso de Python, como es un lenguaje dinámico e interpretado, no genera artefactos binarios (a menos que se use un compilador especializado, pero esto no es usual).
 
 Un artefacto tiene, además de un nombre, una *etiqueta* generalmente asociada con su número de versión. De esta manera es posible tener el mismo artefacto con distintas versiones.
 
@@ -205,3 +205,23 @@ git reset --hard paso-10
 ```
 
 La ejecución de este paso requiere su propio pipeline. Por favor, [continúe aquí](https://github.com/orcilatam/iac/) para completar el ejercicio.
+
+
+## Paso adicional 11 — Verificación de vulnerabilidades
+
+OWASP (Open Web Application Security Project) es una fundación sin fines de lucro que publica herramientas y manuales para difundir buenas prácticas de seguridad. **Dependency Check** es un utilitario open source creado por OWASP para detectar vulnerabilidades conocidas en las *dependencias* de un proyecto. Por *dependencias* se entienden todas las bibliotecas, utilitarios y otros proyectos de base encima de las cuales se construye una aplicación. Dependency Check puede analizar una aplicación para determinar si alguna de sus dependencias contiene vulnerabilidades documentadas (conocidas como **CVE** o Common Vulnerabilities and Exposures en la jerga de seguridad) y cuáles son las posibles soluciones (conocidas como **mitigaciones** en la jerga). Dependency Check se conecta a una base de datos de OWASP en internet para mantenerse constantemente actualizado con las nuevas CVEs que se descubren y publican casi a diario. En internet es posible consultar las CVEs, si se conoce su número identificador, en [https://cve.mitre.org/](https://cve.mitre.org/)
+
+La verificación de dependencias es sólo uno de los muchos aspectos de seguridad que pueden aparecer en DevOps. De hecho, muchas organizaciones ya hablan de  *DevSecOps* (Development, Security and Operations). Entre estos aspectos tenemos, además de las verificaciones de dependencias, el análisis estático del código de la aplicación para detectar prácticas inseguras (nótese que SonarQube ya emite un reporte de este aspecto), el análisis de comportamiento dinámico de una aplicación en producción, los tests de penetración (pentests) ejecutados por hackers éticos, el establecimiento y revisión de perímetros de seguridad web usando WAFs (Web Application Firewalls), etc.
+
+Una exploración de todos estos aspectos está fuera del alcance de este curso introductorio. Sin embargo, la combinación de SonarQube y Dependency Check asegura una base mínima suficiente para la verificación de vulnerabilidades más comunes.
+
+Para ver cómo incorporar Dependency Check a un nuevo stage:
+
+```sh
+git checkout master
+git reset --hard paso-11
+```
+
+Hacer clic en *Build Now* en Jenkins para ejecutar el pipeline.
+
+Una vez concluido el pipeline haga clic en el número de Build. Al lado izquierdo aparece un link al reporte de Dependency Check.
