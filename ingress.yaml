@@ -1,0 +1,12 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-{{ project.name }}
+spec:
+  rules:
+  - host: {{ project.name }}.parroquiano.info
+    http:
+      paths:
+      - backend:
+          serviceName: {{ project.name }}
+          servicePort: 80

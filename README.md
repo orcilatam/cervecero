@@ -146,3 +146,27 @@ kubectl describe pod $POD
 kubectl logs -f pod $POD
 kubectl logs -f $POD
 ```
+
+## Paso 8 — Configuración de Ingress
+
+Los despliegues del paso anterior no son visibles fuera del cluster de Kubernetes. Para exponer el cluster al mundo, lo usual es proveerle un punto de entrada controlado denominado **Ingress**.
+
+Este consiste de un *web front* (también llamado *reverse proxy*) que acepta las peticiones HTTP de internet y las encamina hacia un Servicio Kubernetes en el proxy. Ingress es una definición genérica; la implementación concreta se basa en un **Ingress Controller**.
+
+El Ingress Controller para nuestro ejemplo se basa en un servidor **Nginx** con balanceo de carga. Para instalar el Ingress Controller, se usará **Helm**.
+
+Helm es un gestor de paquetes para Kubernetes. Este permite instalar y pre-configurar un grupo relacionado de servicios, deployments, configuraciones y recursos de Kubernetes como una unidad en lugar de tener que aplicar manifiestos de Kubernetes uno por uno.
+
+Para ver los archivos en el nuevo stage:
+
+```sh
+git checkout master
+git reset --hard paso-8
+```
+
+Hacer clic en *Build Now* en Jenkins para ejecutar el pipeline.
+
+Nótese que incluso después de instalar el Ingress Controller la aplicación continúa inaccesible desde internet. Es necesario completar dos pasos adicionales con los DNS que generalmente se ejecutan manualmente:
+
+- Registrar un dominio público y apuntar los DNS a DigitalOcean. Para nuestro ejemplo usaremos el dominio `parroquiano.info`, que ya apunta a `ns{1,2}.digitalocean.com`
+- Crear un subdominio DNS `cervecero.parroquiano.info` que apunte al Ingress Controller creado con Helm (usar TTL 300)
