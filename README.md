@@ -1,7 +1,7 @@
 # Modelo predictivo de consumo de cerveza
 
 ![Cervecero](https://raw.githubusercontent.com/orcilatam/cervecero/master/cervecero/static/img/cervecero.png)
-
+agrego un cambio para prueba Evelyn
 Proyecto de prueba para curso práctico de DevOps de la UDD. Conversión de dinámica 2 de clase 4 (notebook de Jupyter con regresión lineal para predicción de consumo de cerveza) a una aplicación Python 3 independiente, sobre un pipeline de Jenkins.
 
 ## Paso 1 — Ejecución del notebook de Jupyter
