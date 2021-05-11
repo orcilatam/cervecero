@@ -241,3 +241,7 @@ git reset --hard paso-12
 Hacer clic en *Build Now* en Jenkins para ejecutar el pipeline.
 
 Las notificaciones se envían al canal de Slack configurado en Jenkins.
+
+---
+
+Copyright &copy; 2021 Marco Bravo, con licencia [GPL v3](LICENSE)
